@@ -1,7 +1,24 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from '../../assets/image-250x180.png'
+import { AuthContext } from "../../Authprovider/Authprovider";
 const Navbar = () => {
+
+const {user,logout}=useContext(AuthContext);
+
+
+
+
+const handelsingout = () => {
+  logout()
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
   useEffect(() => {
     const toggleMenu = () => {
       const navToggle = document.getElementsByClassName("toggle");
@@ -53,25 +70,35 @@ const Navbar = () => {
           Home
         </Link>
         <Link
+          to="dashboard"
+          className="block md:inline-block text-blue-900
+           hover:text-blue-500 px-3 py-3 border-b-2 border-blue-900 md:border-none"
+        >
+          My Dashboard
+        </Link>
+       
+        <Link
+          to="myprofile"
+          className="block md:inline-block text-blue-900 hover:text-blue-500 px-3 py-3 border-b-2 border-blue-900 md:border-none"
+        >
+          My profile
+        </Link>
+        {user? <></> :<Link
           to="login"
           className="block md:inline-block text-blue-900 hover:text-blue-500 px-3 py-3 border-b-2 border-blue-900 md:border-none"
         >
           Login
-        </Link>
-        <Link
-          to="all_task"
-          className="block md:inline-block text-blue-900 hover:text-blue-500 px-3 py-3 border-b-2 border-blue-900 md:border-none"
-        >
-          All Task
-        </Link>
+        </Link>}
        
       </div>
-      <Link
+     { user? <> <button className="toggle hidden md:flex w-full md:w-auto px-4 py-2 text-right bg-blue-900 hover:bg-blue-500 text-white md:rounded" onClick={handelsingout}>
+            Sign Out
+          </button></>: <Link
         to="register"
         className="toggle hidden md:flex w-full md:w-auto px-4 py-2 text-right bg-blue-900 hover:bg-blue-500 text-white md:rounded"
       >
         Create Account
-      </Link>
+      </Link>}
     </nav>
   );
 };

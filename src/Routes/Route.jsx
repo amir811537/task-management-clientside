@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import Mainlayout from "../Layouts/Mainlayout/Mainlayout";
 import Home from "../Components/pages/Home/Home";
-import Alltask from "../Components/pages/Alltask/Alltask";
 import Login from "../Components/pages/Login/Login";
 import Register from "../Components/pages/Register/Register";
+import Profile from "../Components/pages/Profile/Profile";
+import Dashboard from "../Components/pages/Dashboard/Dashboard";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -16,8 +17,12 @@ const router = createBrowserRouter([
             element:<Home></Home>
         },
         {
-            path:'all_task',
-            element:<Alltask></Alltask>
+path: 'dashboard',
+element:<Dashboard></Dashboard>
+        },
+        {
+            path:'myprofile',
+            element:<Profile></Profile>
         },
         {
           path:'login',

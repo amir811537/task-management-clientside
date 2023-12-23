@@ -4,8 +4,15 @@ import logimg from "../../../assets/authentication.gif";
 import logo from "../../../assets/image-250x180.png";
 import { BiLogIn } from "react-icons/bi";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../../../Authprovider/Authprovider";
 
-const login = () => {
+const Login = () => {
+
+
+  const { signIn } =useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
@@ -15,32 +22,19 @@ const login = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // createUser(data.email, data.password).then((result) => {
-    //   const loggedUser = result.user;
-    //   console.log(loggedUser);
-    //   updateUserProfile(data.name, data.PhotoURL)
-    //     .then(() => {
-    //       // create user entry in data base
-    //       const userinfo = {
-    //         name: data.name,
-    //         email: data.email,
-    //       };
-    //       axiosPublic.post("/users", userinfo).then((res) => {
-    //         if (res.data.insertedId) {
-    //           console.log("user added a data base ");
-    //           reset();
-    //           Swal.fire({
-    //             position: "top-start",
-    //             icon: "success",
-    //             title: "register successful",
-    //             timer: 2000,
-    //           });
-    //           navigate("/");
-    //         }
-    //       });
-    //     })
-    //     .catch((error) => console.log(error));
-    // });
+    signIn(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        Swal.fire({
+          icon: "success",
+          title: "Login success",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -60,19 +54,35 @@ const login = () => {
                   type="email"
                   placeholder="Email"
                 />
+                {errors.email && (
+                  <p className="text-red-600">
+                    {errors.email.message || "email is required"}
+                  </p>
+                )}
+
                 <input
                   {...register("password", { required: true })}
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                  className="w-full px-8 
+                  py-4 rounded-lg font-medium
+                   bg-gray-100 border border-gray-200
+                    placeholder-gray-500 
+                    text-sm focus:outline-none
+                     focus:border-gray-400 focus:bg-white mt-5"
                   type="password"
                   placeholder="Password"
                 />
+{errors.password && (
+                  <p className="text-red-600">
+                    {errors.password.message || "password is required"}
+                  </p>
+                )}
                 <div className="w-1/2 flex items-center">
                   <input
                     id="remember-me"
                     type="checkbox"
                     className="mt-1 mr-2"
                   />
-                  <label htmlFor="remember-me">Remember me!</label>
+<label htmlFor="remember-me">Remember me</label>
                 </div>
                 <button
           type="submit"
@@ -135,4 +145,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
