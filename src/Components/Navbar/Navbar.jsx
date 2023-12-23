@@ -20,13 +20,13 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="flex flex-wrap items-center justify-between p-3 bg-teal-200">
+    <nav className="flex flex-wrap items-center justify-between p-3 bg-sky-400">
       <img
         src={logo}
         className="h-10 w-10"
         alt="ACME"
         width="120"
-      />
+      /> 
       <div className="flex md:hidden">
         <button id="hamburger">
           <img
