@@ -21,12 +21,14 @@ const Navbar = () => {
 
   return (
     <nav className="flex flex-wrap items-center justify-between p-3 bg-sky-400">
-      <img
+     <div className="pl-10"> 
+     <img
         src={logo}
-        className="h-10 w-10"
+        className="h-10 w-10 "
         alt="ACME"
         width="120"
       /> 
+     </div>
       <div className="flex md:hidden">
         <button id="hamburger">
           <img
@@ -51,24 +53,25 @@ const Navbar = () => {
           Home
         </Link>
         <Link
+          to="login"
+          className="block md:inline-block text-blue-900 hover:text-blue-500 px-3 py-3 border-b-2 border-blue-900 md:border-none"
+        >
+          Login
+        </Link>
+        <Link
           to="all_task"
           className="block md:inline-block text-blue-900 hover:text-blue-500 px-3 py-3 border-b-2 border-blue-900 md:border-none"
         >
           All Task
         </Link>
-        <Link
-          to="/"
-          className="block md:inline-block text-blue-900 hover:text-blue-500 px-3 py-3 border-b-2 border-blue-900 md:border-none"
-        >
-          Home
-        </Link>
+       
       </div>
-      <a
-        href="#"
+      <Link
+        to="register"
         className="toggle hidden md:flex w-full md:w-auto px-4 py-2 text-right bg-blue-900 hover:bg-blue-500 text-white md:rounded"
       >
         Create Account
-      </a>
+      </Link>
     </nav>
   );
 };
