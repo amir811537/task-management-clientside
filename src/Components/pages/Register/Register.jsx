@@ -2,9 +2,69 @@
 import { Link } from "react-router-dom";
 import logimg from '../../../assets/authentication.gif'
 import logo from '../../../assets/image-250x180.png'
-
+import { useForm } from "react-hook-form";
 
 const Register = () => {
+
+
+
+
+
+
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+      } = useForm();
+
+
+
+
+
+
+      const onSubmit = (data) => {
+        console.log(data);
+        // createUser(data.email, data.password).then((result) => {
+        //   const loggedUser = result.user;
+        //   console.log(loggedUser);
+        //   updateUserProfile(data.name, data.PhotoURL)
+        //     .then(() => {
+        //       // create user entry in data base
+        //       const userinfo = {
+        //         name: data.name,
+        //         email: data.email,
+        //       };
+        //       axiosPublic.post("/users", userinfo).then((res) => {
+        //         if (res.data.insertedId) {
+        //           console.log("user added a data base ");
+        //           reset();
+        //           Swal.fire({
+        //             position: "top-start",
+        //             icon: "success",
+        //             title: "register successful",
+        //             timer: 2000,
+        //           });
+        //           navigate("/");
+        //         }
+        //       });
+        //     })
+        //     .catch((error) => console.log(error));
+        // });
+      };
+
+
+
+
+
+
+
+
+
+
+
+
     return (
         <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
             <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
@@ -17,36 +77,42 @@ const Register = () => {
                         <h1 className="text-2xl xl:text-3xl font-extrabold">
                             Register 
                         </h1>
-                        <div className="w-full flex-1 mt-8">
+
+                        <form  onSubmit={handleSubmit(onSubmit)}
+                        
+                        className="w-full flex-1 mt-8">
                              <div className="mx-auto max-w-xs">
                                 <input
+                                {...register("name", { required: true })}
                                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                     type="text" name="name" placeholder="your name" />
                                 <input
+                                {...register("profession", { required: true })}
                                     className="w-full px-8 py-4  mt-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                     type="text" name="profession" placeholder="your profession" />
                                 <input
+                                {...register("email", { required: true })}
                                     className="w-full mt-5 px-8 py-4 rounded-lg font-medium 
                                     bg-gray-100 border border-gray-200 placeholder-gray-500 
                                     text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                     type="email" name="email" placeholder="Email" />
                                 <input
+                                {...register("password", { required: true })}
                                     className="w-full px-8 py-4 rounded-lg font-medium
                                      bg-gray-100 border border-gray-200 placeholder-gray-500 
                                      text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                                     type="password" name="password" placeholder="Password" />
-                                <button
-                                    className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                                    <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" strokeWidth="2"
-                                        strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                                        <circle cx="8.5" cy="7" r="4" />
-                                        <path d="M20 8v6M23 11h-6" />
-                                    </svg>
-                                    <span className="ml-3">
-                                        Sign Up
-                                    </span>
-                                </button>
+                              <button
+          type="submit"
+          className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+        >
+          <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+            <circle cx="8.5" cy="7" r="4" />
+            <path d="M20 8v6M23 11h-6" />
+          </svg>
+          <span className="ml-3">Register Now</span>
+        </button>
                                 <p className="mt-6 text-xs text-gray-600 text-center">
                                     alreay have an Account{" "}
                                     <Link  to="/login" className="border-b border-gray-500 border-dotted">
@@ -87,7 +153,7 @@ const Register = () => {
                             </div>
 
 
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div className="flex-1 bg-indigo-100 text-center hidden lg:flex">
