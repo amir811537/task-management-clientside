@@ -1,10 +1,13 @@
 import axios from "axios";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../Authprovider/Authprovider";
 
 const CreateTask = () => {
   const navigate = useNavigate();
+  const {user}=useContext(AuthContext);
 
   const {
     register,
@@ -20,6 +23,7 @@ const CreateTask = () => {
         priority: data.priority,
         deadlines: data.deadlines,
         descriptions: data.descriptions,
+        email:user?.email,
       };
 
       const res = await axios.post("http://localhost:5000/alltask", taskInfo);
