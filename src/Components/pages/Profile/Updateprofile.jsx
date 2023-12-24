@@ -24,7 +24,7 @@ const Updateprofile = () => {
     setLoading(false);
   }, [userInformation]);
 
-  const { _id, name, image, Blood_Group, District, Upazila } = userInformation;
+  const { _id, name,} = userInformation;
 
   // console.log("=====================",image)
 
@@ -38,7 +38,7 @@ const Updateprofile = () => {
 
 
   const onSubmit = async (data) => {
-    // console.log(data.image,data.district,data.upzilla,data.bloodgroup,data.name)
+    console.log(data.image,data.name,data.phone)
 
     try {
 
@@ -53,12 +53,11 @@ const Updateprofile = () => {
         const userInfo = {
           name: data.name,
           image: res.data.data.display_url,
-          District: data.district,
-          Upazila: data.upzilla,
-          Blood_Group: data.bloodgroup
+          Phone: data.phone,
+          Address: data.address
         };
 
-        const userRes = await axios.put(`/taskusers/${_id}`, userInfo);
+        const userRes = await axios.put(`http://localhost:5000/taskusers/${_id}`, userInfo);
         console.log(userInfo);
 
         if (userRes.data) {
@@ -69,7 +68,7 @@ const Updateprofile = () => {
             showConfirmButton: false,
             timer: 1500
           });
-          navigate('/dashboard/profile')
+          navigate('/myprofile')
         }
       }
 
@@ -89,97 +88,69 @@ const Updateprofile = () => {
       ) : (
         <div>
           {/* Your update form and UI here */}
-          <div className="h-full bg-gray-400 dark:bg-gray-900">
+          <div className="h-full">
             <div className="mx-auto">
               <div className="flex justify-center px-6 py-12">
                 {/* <!-- Col --> */}
-                <div className="w-full lg:w-7/12 bg-white dark:bg-gray-700 p-5 rounded-lg ">
-                  <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
+                <div className="w-full lg:w-7/12  p-5 rounded-lg ">
+                  <h3 className="py-4 text-2xl text-center">
                     Update Your Profile
                   </h3>
 
                   <form
-                    className="px-8 pt-6 pb-8 mb-4 bg-white dark:bg-gray-800 rounded"
+                    className="px-8 pt-6 pb-8 mb-4  rounded"
                     onSubmit={handleSubmit(onSubmit)}
                   >
                     <div className="mb-4">
                       <label
-                        className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                        className="block mb-2 text-sm font-bold "
                         htmlFor="name"
                       >
                         Name:
                       </label>
                       <input
                         {...register("name")}
-                        className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                        className="w-full px-3 py-2 mb-3 text-sm leading-tight  border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                         name="name"
                         defaultValue={name}
                         type="text"
                         placeholder="Enter Your Name..."
                       />
                     </div>
-
-
-                    {/* to do dainamic upazila and districs add in to input fild */}
-
-
-
-                    <div className="mb-4 md:flex md:justify-between">
-                <div className="mb-4 md:flex md:justify-between">
-                  <div className="mb-4 md:mr-2 md:mb-0">
-                    <label
-                      className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
-                      htmlFor="district"
-                    >
-                      District:
-                    </label>
-                   
-                  </div>
-                  <div className="md:ml-2">
-                    <label
-                      className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
-                      htmlFor="upazila"
-                    >
-                      Upazila:
-                    </label>
-                
-                  </div>
-                </div>
-              </div>
-
-
                     <div className="mb-4">
                       <label
-                        className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
-                        htmlFor="bloodgroup"
+                        className="block mb-2 text-sm font-bold "
+                        htmlFor="name"
                       >
-                        Blood Group:
+                        address:
                       </label>
-                      <select
-                        {...register("bloodgroup")}
-                        className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                        name="bloodgroup"
-                        id="bloodgroup"
-                        required
-                        defaultValue={Blood_Group}
+                      <input
+                        {...register("address")}
+                        className="w-full px-3 py-2 mb-3 text-sm leading-tight  border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                        name="address"
+                        type="text"
+                        placeholder="enter your address..."
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        className="block mb-2 text-sm font-bold "
+                        htmlFor="name"
                       >
-                        <option value="" disabled selected>
-                          Select your blood group
-                        </option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                      </select>
+                        phone:
+                      </label>
+                      <input
+                        {...register("phone")}
+                        className="w-full px-3 py-2 mb-3 text-sm leading-tight  border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                        name="phone"
+                        type="text"
+                        placeholder="Phone..."
+                      />
                     </div>
 
                     <div className="form-control w-full py-3 mb-2 max-w-xs">
                       <label
-                        className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                        className="block mb-2 text-sm font-bold "
                         htmlFor="image"
                       >
                         Update Profile Picture:(150 x 150 pixels)

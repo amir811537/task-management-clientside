@@ -61,7 +61,7 @@ const navigate =useNavigate()
                 </div>
                 <div className="flex items-center mb-2">
                     <div className="w-1/3 text-gray-500 font-semibold">Address</div>
-                    <div className="w-2/3">{finalUser[0].address}</div>
+                    <div className="w-2/3">{finalUser[0].Address}</div>
                 </div>
                
              
@@ -72,7 +72,7 @@ const navigate =useNavigate()
                 </div>
                 <div className="flex items-center mb-2">
                     <div className="w-1/3 text-gray-500 font-semibold">Phone</div>
-                    <div className="w-2/3">{finalUser[0].phone}</div>
+                    <div className="w-2/3">{finalUser[0].Phone}</div>
                 </div>
             </div>
 
