@@ -5,33 +5,39 @@ import Login from "../Components/pages/Login/Login";
 import Register from "../Components/pages/Register/Register";
 import Profile from "../Components/pages/Profile/Profile";
 import Dashboard from "../Components/pages/Dashboard/Dashboard";
+import Updateprofile from "../Components/pages/Profile/Updateprofile";
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Mainlayout></Mainlayout>,
-      children:[
+  {
+    path: "/",
+    element: <Mainlayout></Mainlayout>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "myprofile",
+        element: <Profile></Profile>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "register",
+        element: <Register></Register>,
+      },
+      {
+        path:'myprofile/Updateprofile/:id',
+        element:<Updateprofile></Updateprofile>,
+        loader:({params})=>fetch(`http://localhost:5000/taskusers/${params.id}`)
 
-
-        {
-            path:"/",
-            element:<Home></Home>
-        },
-        {
-path: 'dashboard',
-element:<Dashboard></Dashboard>
-        },
-        {
-            path:'myprofile',
-            element:<Profile></Profile>
-        },
-        {
-          path:'login',
-          element:<Login></Login>
-        },{
-          path:'register',
-          element:<Register></Register>
-        }
-      ]
-    },
-  ]);
-  export default router;
+      }
+    ],
+  },
+]);
+export default router;
