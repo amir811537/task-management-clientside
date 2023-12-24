@@ -10,6 +10,7 @@ import { AuthContext } from "../../../Authprovider/Authprovider";
 
 const Register = () => {
     const {createUser}=useContext(AuthContext);
+    // const {user}=useContext(AuthContext)
 
 
 
@@ -20,19 +21,35 @@ const Register = () => {
 
 
 
-    const handelGoogle = () => {
-        googleSignin().then((result) => {
-          console.log(result);
-          Swal.fire({
-            icon: "success",
-            title: "Login success",
-            showConfirmButton: false,
-            timer: 3000,
-          });
-          navigate(location?.state ? location.state : "/");
-    
-        });
-    };
+    const handelGoogle = async () => {
+      try {
+          const result = await googleSignin();
+          const loggedUser = result.user;
+  
+          const userinfo = {
+              name: result.user?.displayName,
+              email: result.user?.email,
+              image: result.user.photoURL,
+          };
+  
+          const res = await axios.post("http://localhost:5000/taskusers", userinfo);
+  
+          if (res.data.insertedId) {
+              console.log("User added to the database");
+              reset();
+              Swal.fire({
+                  position: "top-start",
+                  icon: "success",
+                  title: "Register successful",
+                  timer: 2000,
+              });
+              navigate("/");
+          }
+      } catch (error) {
+          console.error(error);
+      }
+  };
+  
 
 
 

@@ -45,7 +45,7 @@ const navigate =useNavigate()
                 <div className="">
     <div className="bg-white shadow-xl rounded-lg py-3">
         <div className="photo-wrapper p-2">
-            <img className="w-32 h-32 rounded-full mx-auto" src={finalUser[0].image} alt="John Doe"/>
+            <img className="w-32 h-32 rounded-full mx-auto" src={finalUser[0].image} alt="update picture"/>
         </div>
         <div className="p-2 text-center">
             <h3 className="text-center text-xl text-gray-900 font-medium leading-8">{finalUser[0].name}</h3>

@@ -6,6 +6,8 @@ import Register from "../Components/pages/Register/Register";
 import Profile from "../Components/pages/Profile/Profile";
 import Dashboard from "../Components/pages/Dashboard/Dashboard";
 import Updateprofile from "../Components/pages/Profile/Updateprofile";
+import PrivateRoutes from "./PrivateRoutes";
+import CreateTask from "../Components/pages/Dashboard/CreateTask";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "myprofile",
-        element: <Profile></Profile>,
+        element:<PrivateRoutes><Profile></Profile></PrivateRoutes>,
       },
       {
         path: "login",
@@ -36,6 +38,10 @@ const router = createBrowserRouter([
         element:<Updateprofile></Updateprofile>,
         loader:({params})=>fetch(`http://localhost:5000/taskusers/${params.id}`)
 
+      },
+      {
+        path:'createTask',
+        element:<CreateTask></CreateTask>
       }
     ],
   },

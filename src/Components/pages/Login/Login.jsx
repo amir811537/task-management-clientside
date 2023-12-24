@@ -7,11 +7,16 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useContext } from "react";
 import { AuthContext } from "../../../Authprovider/Authprovider";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 const Login = () => {
 
+  const {googleSignin}=useContext(AuthContext);
 
   const { signIn } =useContext(AuthContext);
+  const navigate= useNavigate();
 
   const {
     register,
@@ -32,10 +37,40 @@ const Login = () => {
           timer: 3000,
         });
       })
+      navigate('/')
       .catch((error) => {
         console.log(error);
       });
   };
+
+  const handelGoogle = async () => {
+    try {
+        const result = await googleSignin();
+        const loggedUser = result.user;
+
+        const userinfo = {
+            name: result.user?.displayName,
+            email: result.user?.email,
+            image: result.user.photoURL,
+        };
+
+        const res = await axios.post("http://localhost:5000/taskusers", userinfo);
+
+        if (res.data.insertedId) {
+            console.log("User added to the database");
+            reset();
+            Swal.fire({
+                position: "top-start",
+                icon: "success",
+                title: "Register successful",
+                timer: 2000,
+            });
+            navigate("/");
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -107,7 +142,7 @@ const Login = () => {
                 </div>
               </div>
               <div className="flex flex-col items-center">
-                <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+                <button onClick={handelGoogle} className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
                   <div className="bg-white p-2 rounded-full">
                     <svg className="w-4" viewBox="0 0 533.5 544.3">
                       <path
