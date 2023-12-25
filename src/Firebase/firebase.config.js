@@ -5,12 +5,17 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBaxMEcJz7RBJ91I8wx3vraibDS3o7K8pA",
-  authDomain: "electronics-bazaar-auth.firebaseapp.com",
-  projectId: "electronics-bazaar-auth",
-  storageBucket: "electronics-bazaar-auth.appspot.com",
-  messagingSenderId: "543067499985",
-  appId: "1:543067499985:web:b343dc0d879a1232b644f0"
+  apiKey: "AIzaSyAugNq0P5Ar5Ri-YNWkCPB4rbMWvk9NF60",
+
+  authDomain: "task-management-auth-65fb3.firebaseapp.com",
+
+  projectId: "task-management-auth-65fb3",
+
+  storageBucket: "task-management-auth-65fb3.appspot.com",
+
+  messagingSenderId: "230301408846",
+
+  appId: "1:230301408846:web:04f0de4773494449d8ed1f",
 };
 
 // Initialize Firebase

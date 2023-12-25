@@ -54,7 +54,7 @@ const Login = () => {
             image: result.user.photoURL,
         };
 
-        const res = await axios.post("http://localhost:5000/taskusers", userinfo);
+        const res = await axios.post("https://task-management-serverside-ten.vercel.app/taskusers", userinfo);
 
         if (res.data.insertedId) {
             console.log("User added to the database");

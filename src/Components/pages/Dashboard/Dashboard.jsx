@@ -25,7 +25,7 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         if (user && user.email) {
-          const response = await axios.get("http://localhost:5000/alltask");
+          const response = await axios.get("https://task-management-serverside-ten.vercel.app/alltask");
 
           const filteredUser = response.data.filter(
             (userData) =>
@@ -46,9 +46,9 @@ const Dashboard = () => {
 
   const handleDeleteTask = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:5000/alltask/${taskId}`);
+      await axios.delete(`https://task-management-serverside-ten.vercel.app/alltask/${taskId}`);
       // Fetch the updated tasks after the delete operation
-      const response = await axios.get("http://localhost:5000/alltask");
+      const response = await axios.get("https://task-management-serverside-ten.vercel.app/alltask");
       const filteredUser = response.data.filter(
         (userData) =>
           userData?.email?.toLowerCase() === user?.email?.toLowerCase()
@@ -86,12 +86,12 @@ const Dashboard = () => {
     updatedTasks.splice(destination.index, 0, movedTask);
 
     try {
-      await axios.patch(`http://localhost:5000/alltask/${draggableId}`, {
+      await axios.patch(`https://task-management-serverside-ten.vercel.app/alltask/${draggableId}`, {
         status: destination.droppableId,
       });
 
       // Fetch the updated tasks after the patch operation
-      const response = await axios.get("http://localhost:5000/alltask");
+      const response = await axios.get("https://task-management-serverside-ten.vercel.app/alltask");
       const filteredUser = response.data.filter(
         (userData) =>
           userData?.email?.toLowerCase() === user?.email?.toLowerCase()

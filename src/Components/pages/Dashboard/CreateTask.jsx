@@ -27,7 +27,7 @@ const CreateTask = () => {
         status: "todo"
       };
 
-      const res = await axios.post("http://localhost:5000/alltask", taskInfo);
+      const res = await axios.post("https://task-management-serverside-ten.vercel.app/alltask", taskInfo);
 
       if (res.data.insertedId) {
         Swal.fire({

@@ -57,7 +57,7 @@ const Updateprofile = () => {
           Address: data.address
         };
 
-        const userRes = await axios.put(`http://localhost:5000/taskusers/${_id}`, userInfo);
+        const userRes = await axios.put(`https://task-management-serverside-ten.vercel.app/taskusers/${_id}`, userInfo);
         console.log(userInfo);
 
         if (userRes.data) {

@@ -8,6 +8,7 @@ import Dashboard from "../Components/pages/Dashboard/Dashboard";
 import Updateprofile from "../Components/pages/Profile/Updateprofile";
 import PrivateRoutes from "./PrivateRoutes";
 import CreateTask from "../Components/pages/Dashboard/CreateTask";
+import About from "../Components/pages/About/About";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <Dashboard></Dashboard>,
+        element:<PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
       },
       {
         path: "myprofile",
@@ -30,13 +31,17 @@ const router = createBrowserRouter([
         element: <Login></Login>,
       },
       {
+path: "about",
+element:<About></About>
+      },
+      {
         path: "register",
         element: <Register></Register>,
       },
       {
         path:'myprofile/Updateprofile/:id',
         element:<Updateprofile></Updateprofile>,
-        loader:({params})=>fetch(`http://localhost:5000/taskusers/${params.id}`)
+        loader:({params})=>fetch(`https://task-management-serverside-ten.vercel.app/taskusers/${params.id}`)
 
       },
       {

@@ -13,7 +13,7 @@ const navigate =useNavigate()
 
     useEffect(() => {
         if (user && user.email) {
-           axios.get('http://localhost:5000/taskusers')
+           axios.get('https://task-management-serverside-ten.vercel.app/taskusers')
                 .then((data) => {
                     const filteredUser = data.data.filter((userData) => userData.email.toLowerCase() === user.email.toLowerCase());
                     setFinalUser(filteredUser);
