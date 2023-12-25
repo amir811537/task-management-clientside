@@ -24,6 +24,7 @@ const CreateTask = () => {
         deadlines: data.deadlines,
         descriptions: data.descriptions,
         email:user?.email,
+        status: "todo"
       };
 
       const res = await axios.post("http://localhost:5000/alltask", taskInfo);
@@ -36,7 +37,7 @@ const CreateTask = () => {
             timer: 2000,
         });        reset(); // Use reset to clear the form
         // Optionally, you can add a success message or navigation logic here
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error(error);
